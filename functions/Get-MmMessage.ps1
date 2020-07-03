@@ -33,7 +33,7 @@
 		$TenantID,
 		
 		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
-		[Alias('ApplicationID','AppID')]
+		[Alias('ApplicationID', 'AppID')]
 		[string]
 		$ClientID,
 		
@@ -64,13 +64,6 @@
 		$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://manage.office.com/' -ClientID $ClientID -ClientSecret $ClientSecret
 		$header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
 		
-		$O365TenantID = $tenant.TenantID
-		$LogType = "O365MessageCenter"
-		
-		#--- Start JSON ---#
-		#$JSON = '['
-		#$JSONCount = 0
-		
 		#--- Get the data ---#
 		$messageCenterMessages = Invoke-RestMethod -Method GET -Headers $header -Uri "https://manage.office.com/api/v1.0/$TenantID/ServiceComms/Messages"
 		
@@ -83,7 +76,7 @@
 					Computer  = $env:COMPUTERNAME
 					O365MsgId = $FeatureMessage.Id
 					O365DefaultId = $domain
-					O365Tenant = $O365TenantID
+					O365Tenant = $TenantID
 					O365WorkloadId = $FeatureMessage.Workload
 					O365WorkloadDisplayName = $FeatureMessage.WorkloadDisplayName
 					O365FeatureDisplayName = $FeatureMessage.FeatureDisplayName
