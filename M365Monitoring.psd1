@@ -7,7 +7,7 @@
 	ModuleVersion = '1.0.0'
 	
 	# ID used to uniquely identify this module
-	GUID = ''
+	GUID = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
 	
 	# Author of this module
 	Author = 'Bryan Zabchuk'
