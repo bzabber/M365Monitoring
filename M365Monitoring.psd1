@@ -10,7 +10,7 @@
 	GUID = ''
 	
 	# Author of this module
-	Author = 'Friedrich Weinmann'
+	Author = 'Bryan Zabchuk'
 	
 	# Company or vendor of this module
 	CompanyName = 'Microsoft'
