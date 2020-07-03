@@ -1,25 +1,25 @@
 ﻿@{
 	
 	# Script module or binary module file associated with this manifest
-	RootModule = 'M365Monitoring.psm1'
+	RootModule        = 'M365Monitoring.psm1'
 	
 	# Version number of this module.
-	ModuleVersion = '1.0.0'
+	ModuleVersion     = '1.0.0'
 	
 	# ID used to uniquely identify this module
-	GUID = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
+	GUID              = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
 	
 	# Author of this module
-	Author = 'Bryan Zabchuk'
+	Author            = 'Bryan Zabchuk'
 	
 	# Company or vendor of this module
-	CompanyName = 'Microsoft'
+	CompanyName       = 'Microsoft'
 	
 	# Copyright statement for this module
-	Copyright = '(c) 2020. All rights reserved.'
+	Copyright         = '(c) 2020. All rights reserved.'
 	
 	# Description of the functionality provided by this module
-	Description = 'Module description'
+	Description       = 'Module description'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
 	PowerShellVersion = '5.1'
@@ -47,7 +47,8 @@
 	
 	# Functions to export from this module
 	FunctionsToExport = @(
-		'Get-MmMessage'	
+		'Get-M365Messages'
+		'Get-M365ServiceHealth'	
 	)
 	
 	# Cmdlets to export from this module
@@ -69,7 +70,7 @@
 	# FileList = @()
 	
 	# Private data to pass to the module specified in ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-	PrivateData = @{
+	PrivateData       = @{
 		
 		#Support for PowerShellGet galleries.
 		PSData = @{
