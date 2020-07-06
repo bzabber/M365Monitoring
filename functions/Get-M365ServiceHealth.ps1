@@ -78,8 +78,9 @@
 					O365FeatureName         = $O365Feature.FeatureDisplayName
 					O365FeatureStatus       = $O365Feature.FeatureStatus
 					O365ImpactDesc          = $0365Feature.ImpactDescription
-				}]
+				}
 				
 			}
 		}
 	}
+}
