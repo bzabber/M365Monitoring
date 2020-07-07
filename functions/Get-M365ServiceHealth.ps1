@@ -62,7 +62,7 @@
 		$header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
 		
 		#--- Get the data ---#
-		$healthData = Invoke-RestMethod -Method GET -Headers $header -Uri "https://manage.office.com/api/v1.0/$TenantID/ServiceComms/Messages"
+		$healthData = Invoke-RestMethod -Method GET -Headers $header -Uri "https://manage.office.com/api/v1.0/$TenantID/ServiceComms/CurrentStatus"
 		
 		Foreach ($O365Workload in $healthData.value ) {
 			Foreach ($O365Feature in $O365Workload.FeatureStatus ) {
