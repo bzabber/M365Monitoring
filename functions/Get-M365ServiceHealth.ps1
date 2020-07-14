@@ -76,8 +76,8 @@
 					O365WorkloadStatus      = $O365Workload.Status
 					O365WorkloadIncidentID  = $O365Workload.IncidentIds
 					O365FeatureName         = $O365Feature.FeatureDisplayName
-					O365FeatureStatus       = $O365Feature.FeatureStatus
-					O365ImpactDesc          = $0365Feature.ImpactDescription
+					O365FeatureStatus       = $O365Feature.FeatureServiceStatusDisplayName
+					O365ImpactDesc          = $O365Feature.ImpactDescription
 				}
 				
 			}
