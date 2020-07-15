@@ -4,7 +4,7 @@
 	RootModule        = 'M365Monitoring.psm1'
 	
 	# Version number of this module.
-	ModuleVersion     = '1.0.0'
+	ModuleVersion     = '1.0.2'
 	
 	# ID used to uniquely identify this module
 	GUID              = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
@@ -19,7 +19,7 @@
 	Copyright         = '(c) 2020. All rights reserved.'
 	
 	# Description of the functionality provided by this module
-	Description       = 'Module description'
+	Description       = 'Query the 365 Service Communications API to collect/display data from the Service Health Dashboard and Message Center.'
 	
 	# Minimum version of the Windows PowerShell engine required by this module
 	PowerShellVersion = '5.1'
