@@ -68,24 +68,27 @@
 			if (($FeatureMessage.LastUpdatedTime -as [DateTime]).AddDays(1) -lt (Get-Date)) { continue }
 			foreach ($MessageHistory in $FeatureMessage.Messages) {
 				[pscustomobject][ordered]@{
-					Computer                = $env:COMPUTERNAME
-					O365MsgId               = $FeatureMessage.Id
-					O365DefaultId           = $domain
-					O365Tenant              = $TenantID
-					O365WorkloadId          = $FeatureMessage.Workload
-					O365WorkloadDisplayName = $FeatureMessage.WorkloadDisplayName
-					O365FeatureDisplayName  = $FeatureMessage.FeatureDisplayName
-					O365MsgStatus           = $FeatureMessage.Status
-					O365MsgSeverity         = $FeatureMessage.Severity
-					O365MsgType             = $FeatureMessage.MessageType
-					O365MsgClass            = $FeatureMessage.Classification
-					O365MsgTitle            = $FeatureMessage.Title
-					O365MsgStartTime        = $FeatureMessage.StartTime
-					O365MsgEndTime          = $FeatureMessage.EndTime
-					O365MsgImpactDesc       = $FeatureMessage.ImpactDescription
-					O365MsgUpdatedTime      = $FeatureMessage.LastUpdatedTime
-					O365MsgHistPubTime      = $MessageHistory.PublishedTime
-					O365MessageHistText     = $MessageHistory.MessageText
+					Computer                            = $env:COMPUTERNAME
+					O365MsgId                           = $FeatureMessage.Id
+					O365DefaultId                       = $domain
+					O365Tenant                          = $TenantID
+					O365WorkloadId                      = $FeatureMessage.Workload
+					O365WorkloadDisplayName             = $FeatureMessage.WorkloadDisplayName
+					O365FeatureDisplayName              = $FeatureMessage.FeatureDisplayName
+					O365MsgAffectedUserCount            = $FeatureMessage.AffectedUserCount
+					O365MsgAffectedTenantCount          = $FeatureMessage.AffectedTenantCount
+					O365MsgStatus                       = $FeatureMessage.Status
+					O365MsgSeverity                     = $FeatureMessage.Severity
+					O365MsgType                         = $FeatureMessage.MessageType
+					O365MsgClass                        = $FeatureMessage.Classification
+					O365MsgTitle                        = $FeatureMessage.Title
+					O365MsgStartTime                    = $FeatureMessage.StartTime
+					O365MsgEndTime                      = $FeatureMessage.EndTime
+					O365MsgImpactDesc                   = $FeatureMessage.ImpactDescription
+					O365MsgUpdatedTime                  = $FeatureMessage.LastUpdatedTime
+					O365MsgHistPubTime                  = $MessageHistory.PublishedTime
+					O365MessageHistText                 = $MessageHistory.MessageText
+					O365MsgAffectedWorkloadDisplayNames = $FeatureMessage.AffectedWorkloadDisplayNames -join ","
 				}
 			}
 		}
