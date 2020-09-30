@@ -14,9 +14,11 @@
 	
 	.PARAMETER ClientSecret
 		Client secret of the application to use for the authentication workflow
+	.PARAMETER TenantName
+		Friendly name of the TenantID, user input determines this name.
 	
 	.EXAMPLE
-		PS C:\> Get-MmMessage -TenantID $tenant -ClientID $clientID -ClientSecret $secret
+		PS C:\> Get-M365Message -TenantID $tenant -ClientID $clientID -ClientSecret $secret -TenantName
 	
 		Retrieves messages for the tenant stored in $tenant
 	
@@ -38,7 +40,11 @@
 		
 		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
 		[string]
-		$ClientSecret
+		$ClientSecret,
+		
+		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $false)]
+		[string]
+		$TenantName
 	)
 	
 	begin {
@@ -70,6 +76,7 @@
 				[pscustomobject][ordered]@{
 					Computer                            = $env:COMPUTERNAME
 					O365MsgId                           = $FeatureMessage.Id
+					O365TenantName                      = $TenantName
 					O365DefaultId                       = $domain
 					O365Tenant                          = $TenantID
 					O365WorkloadId                      = $FeatureMessage.Workload
