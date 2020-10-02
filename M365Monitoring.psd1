@@ -4,7 +4,7 @@
 	RootModule        = 'M365Monitoring.psm1'
 	
 	# Version number of this module.
-	ModuleVersion     = '1.0.4'
+	ModuleVersion     = '1.0.5'
 	
 	# ID used to uniquely identify this module
 	GUID              = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
