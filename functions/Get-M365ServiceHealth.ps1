@@ -42,13 +42,13 @@
 
 		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $false)]
 		[string]
-		$TenantName
+		$Tenant
 	)
 	
 	begin {
 		$loginURL = "https://login.windows.net/"
 	
-		Get-process {
+		Get-Process {
 			$tenantLoginURL = $loginURL + $TenantID
 		
 			$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://graph.microsoft.com/' -ClientID $ClientID -ClientSecret $ClientSecret
@@ -73,7 +73,7 @@
 					[PSCustomObject][ordered]@{
 						Computer                = $env:COMPUTERNAME
 						O365StatusTime          = $O365Workload.StatusTime
-						O365TenantName          = $TenantName
+						O365TenantName          = $Tenant
 						O365DefaultId           = $domain
 						O365TenantID            = $TenantID
 						O365WorkloadId          = $O365Workload.Id
