@@ -47,45 +47,44 @@
 	
 	begin {
 		$loginURL = "https://login.windows.net/"
-	
-		Get-Process {
-			$tenantLoginURL = $loginURL + $TenantID
+	}
+	process {
+		$tenantLoginURL = $loginURL + $TenantID
 		
-			$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://graph.microsoft.com/' -ClientID $ClientID -ClientSecret $ClientSecret
-			$headerParams = @{ 'Authorization' = "$($oauth.token_type) $($oauth.access_token)" }
+		$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://graph.microsoft.com/' -ClientID $ClientID -ClientSecret $ClientSecret
+		$headerParams = @{ 'Authorization' = "$($oauth.token_type) $($oauth.access_token)" }
 		
-			$paramInvokeRestMethod = @{
-				Headers   = $headerParams
-				Uri       = 'https://graph.microsoft.com/v1.0/domains'
-				UserAgent = 'application/json'
-				Method    = 'Get'
-			}
-			$domain = ((Invoke-RestMethod @paramInvokeRestMethod).value | Where-Object isDefault).id
+		$paramInvokeRestMethod = @{
+			Headers   = $headerParams
+			Uri       = 'https://graph.microsoft.com/v1.0/domains'
+			UserAgent = 'application/json'
+			Method    = 'Get'
+		}
+		$domain = ((Invoke-RestMethod @paramInvokeRestMethod).value | Where-Object isDefault).id
 		
-			$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://manage.office.com/' -ClientID $ClientID -ClientSecret $ClientSecret
-			$header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
+		$oauth = New-OAuthToken -Uri "$tenantLoginURL/oauth2/token" -Resource 'https://manage.office.com/' -ClientID $ClientID -ClientSecret $ClientSecret
+		$header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
 		
-			#--- Get the data ---#
-			$healthData = Invoke-RestMethod -Method GET -Headers $header -Uri "https://manage.office.com/api/v1.0/$TenantID/ServiceComms/CurrentStatus"
+		#--- Get the data ---#
+		$healthData = Invoke-RestMethod -Method GET -Headers $header -Uri "https://manage.office.com/api/v1.0/$TenantID/ServiceComms/CurrentStatus"
 		
-			Foreach ($O365Workload in $healthData.value ) {
-				Foreach ($O365Feature in $O365Workload.FeatureStatus ) {
-					[PSCustomObject][ordered]@{
-						Computer                = $env:COMPUTERNAME
-						O365StatusTime          = $O365Workload.StatusTime
-						O365TenantName          = $TenantName
-						O365DefaultId           = $domain
-						O365TenantID            = $TenantID
-						O365WorkloadId          = $O365Workload.Id
-						O365WorkloadDisplayName = $O365Workload.WorkloadDisplayName
-						O365WorkloadStatus      = $O365Workload.Status
-						O365WorkloadIncidentID  = $O365Workload.IncidentIds -join ","
-						O365FeatureName         = $O365Feature.FeatureDisplayName
-						O365FeatureStatus       = $O365Feature.FeatureServiceStatus
-						O365ImpactDesc          = $O365Feature.ImpactDescription
-					}
-				
+		Foreach ($O365Workload in $healthData.value ) {
+			Foreach ($O365Feature in $O365Workload.FeatureStatus ) {
+				[PSCustomObject][ordered]@{
+					Computer                = $env:COMPUTERNAME
+					O365StatusTime          = $O365Workload.StatusTime
+					O365TenantName          = $TenantName
+					O365DefaultId           = $domain
+					O365TenantID            = $TenantID
+					O365WorkloadId          = $O365Workload.Id
+					O365WorkloadDisplayName = $O365Workload.WorkloadDisplayName
+					O365WorkloadStatus      = $O365Workload.Status
+					O365WorkloadIncidentID  = $O365Workload.IncidentIds -join ","
+					O365FeatureName         = $O365Feature.FeatureDisplayName
+					O365FeatureStatus       = $O365Feature.FeatureServiceStatus
+					O365ImpactDesc          = $O365Feature.ImpactDescription
 				}
+				
 			}
 		}
 	}
