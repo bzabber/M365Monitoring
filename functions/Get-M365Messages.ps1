@@ -42,7 +42,7 @@
 		[string]
 		$ClientSecret,
 		
-		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $false)]
+		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true)]
 		[string]
 		$TenantName
 	)

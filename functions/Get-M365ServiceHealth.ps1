@@ -40,9 +40,9 @@
 		[string]
 		$ClientSecret,
 
-		[Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $false)]
+		[Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true)]
 		[string]
-		$Tenant
+		$TenantName
 	)
 	
 	begin {
@@ -73,7 +73,7 @@
 					[PSCustomObject][ordered]@{
 						Computer                = $env:COMPUTERNAME
 						O365StatusTime          = $O365Workload.StatusTime
-						O365TenantName          = $Tenant
+						O365TenantName          = $TenantName
 						O365DefaultId           = $domain
 						O365TenantID            = $TenantID
 						O365WorkloadId          = $O365Workload.Id
