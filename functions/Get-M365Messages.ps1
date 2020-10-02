@@ -15,10 +15,10 @@
 	.PARAMETER ClientSecret
 		Client secret of the application to use for the authentication workflow
 	.PARAMETER TenantName
-		Friendly name of the TenantID, user input determines this name.
+		Friendly name of the TenantID, user input determines this name. (ex: Contoso)
 	
 	.EXAMPLE
-		PS C:\> Get-M365Message -TenantID $tenant -ClientID $clientID -ClientSecret $secret -TenantName
+		PS C:\> Get-M365Message -TenantID $tenant -ClientID $clientID -ClientSecret $secret -TenantName $TenantName
 	
 		Retrieves messages for the tenant stored in $tenant
 	
