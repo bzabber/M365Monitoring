@@ -89,7 +89,7 @@
 					O365MsgType                         = $FeatureMessage.MessageType
 					O365MsgClass                        = $FeatureMessage.Classification
 					O365MsgTitle                        = $FeatureMessage.Title
-					O365MsgMessageDetails               = $FeatureMessage.Messages
+					O365MsgMessageDetails               = $FeatureMessage.MessageText
 					O365MsgStartTime                    = $FeatureMessage.StartTime
 					O365MsgEndTime                      = $FeatureMessage.EndTime
 					O365MsgImpactDesc                   = $FeatureMessage.ImpactDescription
