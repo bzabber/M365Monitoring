@@ -96,7 +96,7 @@
 					O365MsgUpdatedTime                  = $FeatureMessage.LastUpdatedTime
 					O365MsgHistPubTime                  = $MessageHistory.PublishedTime
 					O365MessageHistText                 = $MessageHistory.MessageText
-					O365MsgPostIncidentURL              = $Message.PostIncidentDocumentUrl
+					O365MsgPostIncidentURL              = $FeatureMessage.PostIncidentDocumentUrl
 					O365MsgAffectedWorkloadDisplayNames = $FeatureMessage.AffectedWorkloadDisplayNames -join ","
 				}
 			}
