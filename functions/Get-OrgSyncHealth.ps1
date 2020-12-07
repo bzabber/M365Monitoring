@@ -58,7 +58,7 @@ function Get-OrgSyncHealth {
 		
         $paramInvokeRestMethod = @{
             Headers   = $headerParams
-            Uri       = 'https://graph.microsoft.com/beta/organization'
+            Uri       = 'https://graph.microsoft.com/v1.0/domains'
             UserAgent = 'application/json'
             Method    = 'Get'
         }
