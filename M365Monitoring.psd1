@@ -4,7 +4,7 @@
 	RootModule        = 'M365Monitoring.psm1'
 	
 	# Version number of this module.
-	ModuleVersion     = '1.0.10'
+	ModuleVersion     = '1.0.12'
 	
 	# ID used to uniquely identify this module
 	GUID              = 'ae4307f2-cbe5-4f08-8eb2-36954e94478a'
@@ -48,7 +48,9 @@
 	# Functions to export from this module
 	FunctionsToExport = @(
 		'Get-M365Messages'
-		'Get-M365ServiceHealth'	
+		'Get-M365ServiceHealth'
+		'Get-OrgSyncHealth'
+		'Get-AADUserSyncHealth'		
 	)
 	
 	# Cmdlets to export from this module
