@@ -78,6 +78,7 @@ function Get-OrgSyncHealth {
                 OrgOnPremSyncEnabled              = $OrgSyncHealthState.onPremisesSyncEnabled
                 O365TenantName                    = $TenantName
                 O365DefaultId                     = $domain
+                OrgDisplayName                    = $OrgSyncHealthState.displayName
                 O365Tenant                        = $TenantID
                 OrgOnPremLastSyncDateTime         = $OrgSyncHealthState.onPremisesLastSyncDateTime
                 OrgOnPremLastPasswordSyncDateTime = $OrgSyncHealthState.onPremisesLastPasswordSyncDateTime
