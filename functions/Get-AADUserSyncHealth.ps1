@@ -1,10 +1,10 @@
-function Get-OrgSyncHealth {
+function Get-AADUserSyncHealth {
     <#
 	.SYNOPSIS
-		Retrieve AAD Sync status at the Azure AD Orgnaization level via Microsoft Graph.
+		Retrieve last on-premise sync date and time from graph.microsoft.com for specific Azure AD Tenant.
 	
 	.DESCRIPTION
-		Retrieve AAD Sync Status at the Azure AD Organization level using Microsoft Graph.
+		Retrieve last on-premise sync date and time from graph.microsoft.com.
 	
 	.PARAMETER TenantID
 		ID of the tenant to manage.
@@ -18,12 +18,12 @@ function Get-OrgSyncHealth {
 		Friendly name of the TenantID, user input determines this name. (ex: Contoso)
 	
 	.EXAMPLE
-		PS C:\> Get-OrgSyncHealth -TenantID $tenant -ClientID $clientID -ClientSecret $secret -TenantName $TenantName
+		PS C:\> Get-AADUSerSyncHealth -TenantID $tenant -ClientID $clientID -ClientSecret $secret -TenantName $TenantName
 	
 		Retrieves messages for the tenant stored in $tenant
 	
 	.EXAMPLE
-		PS C:\> Import-Csv .\tenants.csv | Get-OrgSyncHealth
+		PS C:\> Import-Csv .\tenants.csv | Get-AADUSerSyncHealth
 	
 		Retrieves messages for all tenants stored in the tenants.csv
 #>
@@ -48,7 +48,7 @@ function Get-OrgSyncHealth {
     )
 	
     begin {
-        $loginURL = "https://login.windows.net/"
+        $loginURL = "https://login.windows.net/" 
     }
     process {
         $tenantLoginURL = $loginURL + $TenantID
@@ -68,20 +68,20 @@ function Get-OrgSyncHealth {
         $header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
 		
         #--- Get the data ---#
-        $OrgSyncHealth = Invoke-RestMethod -Method GET -Headers $header -Uri "https://graph.microsoft.com/beta/organization"
+        $AADUserSyncHealth = Invoke-RestMethod -Method GET -Headers $header -Uri "https://graph.microsoft.com/beta/users?$select=displayName,userPrincipalName,onPremisesLastSyncDateTime,onPremisesSyncEnabled"
 		
-        foreach ($OrgSyncHealthState in $OrgSyncHealth.value) {
+        foreach ($AADUserSyncHealthState in $AADUserSyncHealth.value) {
             #if (($FeatureMessage.LastUpdatedTime -as [DateTime]).AddDays(1) -lt (Get-Date)) { continue }
             #foreach ($MessageHistory in $FeatureMessage.Messages) {
             [pscustomobject][ordered]@{
-                Computer                          = $env:COMPUTERNAME
-                OrgOnPremSyncEnabled              = $OrgSyncHealthState.onPremisesSyncEnabled
-                O365TenantName                    = $TenantName
-                O365DefaultId                     = $domain
-                OrgDisplayName                    = $OrgSyncHealthState.displayName
-                O365Tenant                        = $TenantID
-                OrgOnPremLastSyncDateTime         = $OrgSyncHealthState.onPremisesLastSyncDateTime
-                OrgOnPremLastPasswordSyncDateTime = $OrgSyncHealthState.onPremisesLastPasswordSyncDateTime
+                Computer                  = $env:COMPUTERNAME
+                UserDisplayName           = $AADUserSyncHealthState.displayName
+                UserPrincipalName         = $AADUserSyncHealthState.userPrincipalName
+                OrgOnPremSyncEnabled      = $AADUserSyncHealthState.onPremisesSyncEnabled
+                OrgOnPremLastSyncDateTime = $AADUserSyncHealthState.onPremisesLastSyncDateTime
+                O365TenantName            = $TenantName
+                O365DefaultId             = $domain
+                O365Tenant                = $TenantID
             }
         }
     }
