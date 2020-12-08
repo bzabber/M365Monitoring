@@ -48,7 +48,7 @@ function Get-OrgSyncHealth {
     )
 	
     begin {
-        $loginURL = "https://login.microsoftonline.com/"# Original loginURL"https://login.windows.net/"
+        $loginURL = "https://login.windows.net/" #"https://login.microsoftonline.com/"# Original loginURL
     }
     process {
         $tenantLoginURL = $loginURL + $TenantID
