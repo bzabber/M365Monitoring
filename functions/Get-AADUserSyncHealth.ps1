@@ -68,20 +68,21 @@ function Get-AADUserSyncHealth {
         $header = @{ "Authorization" = "Bearer $($oauth.access_token)"; "Content-Type" = "application/json" }
 		
         #--- Get the data ---#
-        $AADUserSyncHealth = Invoke-RestMethod -Method GET -Headers $header -Uri "https://graph.microsoft.com/beta/users?$select=displayName,userPrincipalName,onPremisesLastSyncDateTime,onPremisesSyncEnabled"
+        $AADUserSyncHealth = Invoke-RestMethod -Method GET -Headers $header -Uri "https://graph.microsoft.com/beta/users?$select=displayName,userPrincipalName,onPremisesLastSyncDateTime,onPremisesSyncEnabled,onPremisesProvisioningErrors"
 		
         foreach ($AADUserSyncHealthState in $AADUserSyncHealth.value) {
             #if (($FeatureMessage.LastUpdatedTime -as [DateTime]).AddDays(1) -lt (Get-Date)) { continue }
             #foreach ($MessageHistory in $FeatureMessage.Messages) {
             [pscustomobject][ordered]@{
-                Computer                  = $env:COMPUTERNAME
-                UserDisplayName           = $AADUserSyncHealthState.displayName
-                UserPrincipalName         = $AADUserSyncHealthState.userPrincipalName
-                OrgOnPremSyncEnabled      = $AADUserSyncHealthState.onPremisesSyncEnabled
-                OrgOnPremLastSyncDateTime = $AADUserSyncHealthState.onPremisesLastSyncDateTime
-                O365TenantName            = $TenantName
-                O365DefaultId             = $domain
-                O365Tenant                = $TenantID
+                Computer                            = $env:COMPUTERNAME
+                UserDisplayName                     = $AADUserSyncHealthState.displayName
+                UserPrincipalName                   = $AADUserSyncHealthState.userPrincipalName
+                AADUserOnPremSyncEnabled            = $AADUserSyncHealthState.onPremisesSyncEnabled
+                AADUserOnPremLastSyncDateTime       = $AADUserSyncHealthState.onPremisesLastSyncDateTime
+                AADUseronPremisesProvisioningErrors = $AADUserSyncHealthState.onPremisesProvisioningErrors
+                O365TenantName                      = $TenantName
+                O365DefaultId                       = $domain
+                O365Tenant                          = $TenantID
             }
         }
     }
